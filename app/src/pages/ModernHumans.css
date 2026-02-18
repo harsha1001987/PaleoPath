@@ -1,0 +1,403 @@
+/* ═══════════════════════════════════════════════════════════════
+   MODERN HUMANS – "Complexity & Technology"
+   Tone: Minimal. High-tech. Clean. Advanced.
+   Accent: Cool blue-white tech tone
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Page shell ──────────────────────────────────────────────── */
+.species-page {
+  min-height: 100vh;
+  background:
+    linear-gradient(160deg, #080c14 0%, #050810 60%, #030508 100%);
+  color: #e8eef8;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Animated grid */
+.species-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(60, 120, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(60, 120, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+  animation: gridDrift 20s linear infinite;
+}
+
+@keyframes gridDrift {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 48px 48px;
+  }
+}
+
+/* Light streak */
+.species-page::after {
+  content: "";
+  position: fixed;
+  top: -10%;
+  left: -20%;
+  width: 140%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(80, 160, 255, 0.12), transparent);
+  pointer-events: none;
+  z-index: 0;
+  animation: lightStreak 12s ease-in-out infinite;
+}
+
+@keyframes lightStreak {
+  0% {
+    top: -5%;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 110%;
+    opacity: 0;
+  }
+}
+
+/* ── Top bar ─────────────────────────────────────────────────── */
+.species-topbar {
+  position: relative;
+  z-index: 10;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 36px;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(60, 120, 255, 0.15);
+  backdrop-filter: blur(12px);
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: rgba(120, 180, 255, 0.65);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.back-btn:hover {
+  color: #60b0ff;
+}
+
+.topbar-title {
+  margin: 0 auto;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: rgba(140, 200, 255, 0.55);
+  text-transform: uppercase;
+}
+
+/* ── Content ─────────────────────────────────────────────────── */
+.species-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 40px 120px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ── Header block ────────────────────────────────────────────── */
+.species-header {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: techReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+.species-icon {
+  font-size: 68px;
+}
+
+.species-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 7.5vw, 7rem);
+  font-weight: 400;
+  margin: 0 0 6px;
+  background: linear-gradient(135deg, #e8f0ff 0%, #a0c8ff 60%, #6090e0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.01em;
+}
+
+.species-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(100, 160, 255, 0.7);
+  margin-bottom: 4px;
+}
+
+.species-era {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(100, 160, 255, 0.45);
+}
+
+/* ── Description ─────────────────────────────────────────────── */
+.species-description {
+  max-width: 680px;
+  font-size: 1rem;
+  line-height: 1.9;
+  color: #8898b8;
+  font-family: 'Montserrat', sans-serif;
+  opacity: 0;
+  animation: techReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 0.35s forwards;
+}
+
+/* ── Details section ─────────────────────────────────────────── */
+.species-details {
+  margin-top: 80px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px 90px;
+  margin-bottom: 80px;
+}
+
+/* Section headings */
+.detail-block h3,
+.detail-wide h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(100, 160, 255, 0.7);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(60, 120, 255, 0.18);
+}
+
+.detail-block p,
+.detail-wide p {
+  font-size: 0.93rem;
+  line-height: 1.9;
+  color: #6878a0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.detail-block ul {
+  padding-left: 16px;
+  margin: 0;
+}
+
+.detail-block li {
+  font-size: 0.91rem;
+  line-height: 1.8;
+  color: #6878a0;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 8px;
+}
+
+/* Scroll reveal */
+.detail-block,
+.detail-wide {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.detail-block.visible,
+.detail-wide.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glass cards */
+.detail-block {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(60, 120, 255, 0.1);
+  border-radius: 12px;
+  padding: 24px 28px;
+  backdrop-filter: blur(4px);
+  transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.detail-block:hover {
+  border-color: rgba(60, 120, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(60, 120, 255, 0.08);
+}
+
+/* Wide sections */
+.detail-wide {
+  max-width: 860px;
+  margin: 0 auto 64px;
+}
+
+/* Discoveries — premium glass pills */
+.discoveries {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.discoveries span {
+  background: rgba(40, 80, 200, 0.08);
+  border: 1px solid rgba(60, 120, 255, 0.18);
+  backdrop-filter: blur(8px);
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  color: #7090c0;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.discoveries span:hover {
+  background: rgba(40, 80, 200, 0.16);
+  border-color: rgba(60, 120, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Highlight box */
+.detail-wide.highlight {
+  background: rgba(30, 60, 160, 0.07);
+  border: 1px solid rgba(60, 120, 255, 0.16);
+  backdrop-filter: blur(10px);
+  padding: 36px 40px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 0 50px rgba(40, 100, 255, 0.06);
+}
+
+/* ── Quiz section ────────────────────────────────────────────── */
+.detail-wide.quiz-cta {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 20px 0;
+  margin: 0 auto 40px;
+}
+
+.quiz-card {
+  background: rgba(6, 12, 28, 0.92);
+  border: 1px solid rgba(60, 120, 255, 0.2);
+  backdrop-filter: blur(16px);
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 44px 40px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(60, 120, 255, 0.06);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55), 0 0 40px rgba(40, 100, 255, 0.12);
+}
+
+.quiz-icon {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.quiz-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #d0e4ff;
+  margin-bottom: 10px;
+}
+
+.quiz-text {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #506080;
+  margin-bottom: 28px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.quiz-btn {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(60, 120, 255, 0.2), rgba(40, 80, 200, 0.12));
+  color: #80b8ff;
+  border: 1px solid rgba(60, 120, 255, 0.35);
+  border-radius: 8px;
+  padding: 13px 36px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.quiz-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(120, 180, 255, 0.18), transparent);
+  transform: skewX(-15deg);
+  transition: left 0.5s ease;
+}
+
+.quiz-btn:hover::before {
+  left: 130%;
+}
+
+.quiz-btn:hover {
+  background: linear-gradient(135deg, rgba(60, 120, 255, 0.35), rgba(40, 80, 200, 0.25));
+  box-shadow: 0 0 24px rgba(60, 120, 255, 0.3);
+  transform: translateY(-2px);
+  color: #b0d4ff;
+}
+
+.quiz-score {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: #506080;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ── Keyframes ───────────────────────────────────────────────── */
+@keyframes techReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}

@@ -1,0 +1,621 @@
+/* ═══════════════════════════════════════════════════════════════
+   OnBoarding – "The First Step Into Time"
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Custom glowing cursor ───────────────────────────────────── */
+.ob-section {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background: #2a2a27;
+    color: #f4f1ec;
+    cursor: none;
+    /* hide default cursor */
+}
+
+/* Glowing orb cursor via pseudo-element on body when on this page */
+.ob-section::after {
+    content: "";
+    position: fixed;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(210, 160, 70, 0.85) 0%, rgba(180, 100, 30, 0.4) 60%, transparent 100%);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    /* Driven by JS via CSS var — fallback center */
+    left: var(--cx, 50%);
+    top: var(--cy, 50%);
+    transition: left 0.06s linear, top 0.06s linear;
+    mix-blend-mode: screen;
+}
+
+/* ── Dust canvas ─────────────────────────────────────────────── */
+.ob-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ── Depth fog ───────────────────────────────────────────────── */
+.ob-fog {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.ob-fog-1 {
+    background: radial-gradient(ellipse 80% 60% at 50% 30%,
+            rgba(60, 50, 35, 0.55) 0%,
+            transparent 70%);
+    animation: fogDrift1 18s ease-in-out infinite alternate;
+}
+
+.ob-fog-2 {
+    background: radial-gradient(ellipse 60% 80% at 50% 80%,
+            rgba(20, 18, 14, 0.5) 0%,
+            transparent 65%);
+    animation: fogDrift2 24s ease-in-out infinite alternate;
+}
+
+@keyframes fogDrift1 {
+    from {
+        transform: translateX(-6%) scale(1);
+    }
+
+    to {
+        transform: translateX(6%) scale(1.04);
+    }
+}
+
+@keyframes fogDrift2 {
+    from {
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        transform: translateY(-4%) scale(1.03);
+    }
+}
+
+/* ── Radial glow behind form ─────────────────────────────────── */
+.ob-radial-glow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+            rgba(160, 90, 30, 0.14) 0%,
+            rgba(120, 70, 20, 0.07) 45%,
+            transparent 70%);
+    pointer-events: none;
+    z-index: 3;
+    animation: glowPulse 6s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+}
+
+/* ── Faint skull background ──────────────────────────────────── */
+.ob-skull-bg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -54%);
+    z-index: 3;
+    pointer-events: none;
+    animation: skullBreathe 9s ease-in-out infinite;
+}
+
+.ob-skull-svg {
+    opacity: 1;
+}
+
+@keyframes skullBreathe {
+
+    0%,
+    100% {
+        transform: translate(-50%, -54%) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, -54%) scale(1.025) translateY(-5px);
+    }
+}
+
+/* ── Grain (reuse from index.css) ────────────────────────────── */
+.hero-grain {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+    animation: grainShift 0.9s steps(1) infinite;
+    opacity: 0.55;
+}
+
+@keyframes grainShift {
+    0% {
+        background-position: 0 0;
+    }
+
+    20% {
+        background-position: -30px 15px;
+    }
+
+    40% {
+        background-position: 15px -20px;
+    }
+
+    60% {
+        background-position: -20px -10px;
+    }
+
+    80% {
+        background-position: 10px 25px;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+/* ── Content wrapper ─────────────────────────────────────────── */
+.ob-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    gap: 1.2rem;
+}
+
+/* ── Eyebrow ─────────────────────────────────────────────────── */
+.ob-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.32em;
+    color: rgba(210, 195, 165, 0.7);
+    margin: 0 0 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shimmer pass every 10s */
+.ob-eyebrow::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 220, 140, 0.35), transparent);
+    animation: eyebrowShimmer 10s ease-in-out infinite 3s;
+}
+
+@keyframes eyebrowShimmer {
+    0% {
+        left: -100%;
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 1;
+    }
+
+    40% {
+        left: 160%;
+        opacity: 1;
+    }
+
+    45% {
+        opacity: 0;
+    }
+
+    100% {
+        left: 160%;
+        opacity: 0;
+    }
+}
+
+.ob-eyebrow-letter {
+    display: inline-block;
+    opacity: 0;
+    animation: letterPop 0.5s ease-out forwards;
+}
+
+@keyframes letterPop {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Heading ─────────────────────────────────────────────────── */
+.ob-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+    font-weight: 500;
+    line-height: 1.18;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(22px) scale(0.97);
+    animation: headingReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 1.4s forwards;
+    text-shadow: 0 0 40px rgba(200, 160, 80, 0.18);
+}
+
+@keyframes headingReveal {
+    from {
+        opacity: 0;
+        transform: translateY(22px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ── Ghosted name echo ───────────────────────────────────────── */
+.ob-name-echo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(5rem, 18vw, 14rem);
+    font-weight: 700;
+    color: rgba(200, 175, 130, 0.055);
+    letter-spacing: 0.04em;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 5;
+    animation: echoFadeIn 0.4s ease-out both;
+    user-select: none;
+}
+
+@keyframes echoFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* ── Birth year reveal ───────────────────────────────────────── */
+.ob-birth-reveal {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    animation: fadeInUp 0.45s ease-out both;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ob-birth-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(200, 175, 130, 0.55);
+}
+
+.ob-birth-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: rgba(220, 185, 120, 0.7);
+    text-shadow: 0 0 20px rgba(200, 150, 60, 0.3);
+    animation: yearCount 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes yearCount {
+    from {
+        transform: translateY(12px) scale(0.85);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* ── Form ────────────────────────────────────────────────────── */
+.ob-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    width: 100%;
+    max-width: 22rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 1.8s forwards;
+}
+
+/* ── Glass field ─────────────────────────────────────────────── */
+.ob-field {
+    position: relative;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.045);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(200, 175, 130, 0.2);
+    transition: border-color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.ob-field--active {
+    border-color: rgba(210, 160, 70, 0.55);
+    transform: scale(1.02);
+    box-shadow:
+        0 0 0 1px rgba(210, 160, 70, 0.15),
+        0 0 24px rgba(180, 110, 30, 0.2),
+        inset 0 1px 0 rgba(255, 220, 140, 0.08);
+}
+
+/* Floating label */
+.ob-label {
+    position: absolute;
+    left: 1.1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: rgba(210, 195, 165, 0.6);
+    pointer-events: none;
+    transition: top 0.25s ease, font-size 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    z-index: 2;
+}
+
+.ob-field--active .ob-label {
+    top: 0.55rem;
+    transform: translateY(0);
+    font-size: 0.6rem;
+    color: rgba(210, 160, 70, 0.85);
+    letter-spacing: 0.12em;
+}
+
+/* Input */
+.ob-input {
+    width: 100%;
+    height: 64px;
+    padding: 1.4rem 1.1rem 0.5rem;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #f4f1ec;
+    caret-color: rgba(210, 160, 70, 0.9);
+    position: relative;
+    z-index: 1;
+}
+
+.ob-input::placeholder {
+    color: transparent;
+    /* hidden — label acts as placeholder */
+}
+
+.ob-field:not(.ob-field--active) .ob-input::placeholder {
+    color: rgba(160, 150, 130, 0.5);
+}
+
+/* Remove number input arrows */
+.ob-input[type="number"]::-webkit-inner-spin-button,
+.ob-input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.ob-input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Border shimmer sweep */
+.ob-field-shimmer {
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    pointer-events: none;
+    background: linear-gradient(105deg,
+            transparent 30%,
+            rgba(220, 180, 100, 0.12) 50%,
+            transparent 70%);
+    background-size: 200% 100%;
+    animation: shimmerSweep 3.5s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.ob-field--active .ob-field-shimmer {
+    opacity: 1;
+}
+
+@keyframes shimmerSweep {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Idle pulse on empty unfocused fields */
+.ob-field:not(.ob-field--active) {
+    animation: idlePulse 4s ease-in-out infinite;
+}
+
+@keyframes idlePulse {
+
+    0%,
+    100% {
+        border-color: rgba(200, 175, 130, 0.2);
+    }
+
+    50% {
+        border-color: rgba(200, 175, 130, 0.35);
+    }
+}
+
+/* ── Continue button ─────────────────────────────────────────── */
+.ob-continue {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    height: 60px;
+    width: 100%;
+    border-radius: 12px;
+    border: none;
+    cursor: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #fff8f0;
+    background: linear-gradient(135deg, #c8622a 0%, #9a4a1e 55%, #7a3a14 100%);
+    box-shadow: 0 4px 22px rgba(180, 80, 20, 0.38);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+    margin-top: 0.4rem;
+}
+
+.ob-continue:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow:
+        0 8px 32px rgba(200, 100, 30, 0.55),
+        0 0 0 1px rgba(220, 140, 60, 0.3),
+        inset 0 1px 0 rgba(255, 200, 120, 0.15);
+}
+
+.ob-continue:active {
+    transform: translateY(-1px) scale(0.99);
+}
+
+/* Light sweep on hover */
+.ob-continue::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 220, 160, 0.22), transparent);
+    transform: skewX(-15deg);
+    transition: left 0.45s ease;
+}
+
+.ob-continue:hover::before {
+    left: 130%;
+}
+
+.ob-continue-label {
+    position: relative;
+    z-index: 1;
+}
+
+.ob-continue-arrow {
+    position: relative;
+    z-index: 1;
+    font-size: 1.1rem;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ob-continue:hover .ob-continue-arrow {
+    transform: translateX(5px);
+}
+
+/* ── Ripple ──────────────────────────────────────────────────── */
+.ob-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 220, 160, 0.32);
+    transform: scale(0);
+    animation: obRipple 0.6s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes obRipple {
+    to {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+/* ── Dissolve transition ─────────────────────────────────────── */
+.ob-dissolve {
+    animation: dissolveOut 0.85s ease-in forwards;
+}
+
+@keyframes dissolveOut {
+    0% {
+        opacity: 1;
+        filter: blur(0px);
+    }
+
+    60% {
+        opacity: 0.3;
+        filter: blur(3px);
+    }
+
+    100% {
+        opacity: 0;
+        filter: blur(8px);
+        transform: scale(1.03);
+    }
+}

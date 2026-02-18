@@ -1,0 +1,259 @@
+/* ==========================================================================
+   LearnShared.css
+   Premium Design System for PaleoPath Learning Section
+   ========================================================================== */
+
+/* --- Typography --- */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+
+/* --- Layout Wrappers --- */
+.learn-section {
+    background-color: #f4efe6;
+    padding: 6rem 2rem;
+    min-height: 80vh;
+    color: #44403c;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.learn-container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* --- Headers --- */
+.learn-header {
+    text-align: center;
+    margin-bottom: 5rem;
+    position: relative;
+}
+
+.learn-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    color: #78716c;
+    margin-bottom: 1.5rem;
+}
+
+.learn-title {
+    font-family: "Playfair Display", serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1c1917;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.learn-divider {
+    width: 100px;
+    height: 3px;
+    background: #d6d3d1;
+    margin: 0 auto 1.5rem auto;
+    border-radius: 999px;
+}
+
+.learn-subtitle {
+    font-family: "Lora", serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    color: #78716c;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- Text Content --- */
+.learn-text {
+    font-family: "Lora", serif;
+    font-size: 1.125rem;
+    line-height: 1.9;
+    color: #44403c;
+    /* Stone-700 */
+    max-width: 720px;
+    margin: 0 auto 4rem auto;
+}
+
+.learn-text p {
+    margin-bottom: 1.5rem;
+}
+
+.learn-text strong {
+    color: #1c1917;
+    /* Stone-900 */
+    font-weight: 600;
+}
+
+/* --- Card Styles --- */
+.learn-card {
+    background: #ffffff;
+    border: 1px solid #e7e5e4;
+    border-radius: 20px;
+    padding: 3rem;
+    margin-bottom: 4rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.learn-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
+    /* Soft shadow */
+    border-color: #d6d3d1;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    font-family: "Playfair Display", serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #1c1917;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+}
+
+@media (min-width: 768px) {
+    .card-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.card-grid h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #78716c;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+.card-grid p {
+    font-family: "Lora", serif;
+    color: #57534e;
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+/* --- Feature Grid (Two Columns) --- */
+.learn-two-col {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+    .learn-two-col {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.info-box {
+    background: #fafaf9;
+    /* Stone-50 */
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid #e7e5e4;
+    transition: all 0.3s ease;
+}
+
+.info-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.07);
+    background: #ffffff;
+}
+
+.info-box h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.35rem;
+    margin: 1rem 0 0.5rem;
+    color: #1c1917;
+    font-weight: 600;
+}
+
+.info-box p {
+    font-family: "Lora", serif;
+    font-size: 1rem;
+    color: #57534e;
+    line-height: 1.7;
+}
+
+/* --- List/Facts Section --- */
+.learn-facts {
+    background: #ffffff;
+    padding: 3rem;
+    border-radius: 24px;
+    border: 1px solid #e7e5e4;
+    margin-top: 4rem;
+}
+
+.facts-title {
+    font-family: "Playfair Display", serif;
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    color: #1c1917;
+    font-weight: 600;
+}
+
+.learn-facts ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.learn-facts li {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid #e7e5e4;
+    font-family: "Lora", serif;
+    color: #44403c;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.learn-facts li:last-child {
+    border-bottom: none;
+}
+
+.learn-facts li::before {
+    content: "•";
+    color: #d6d3d1;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Responsive Text --- */
+@media (max-width: 768px) {
+    .learn-title {
+        font-size: 2.25rem;
+    }
+
+    .learn-text {
+        font-size: 1.05rem;
+    }
+
+    .learn-card {
+        padding: 2rem;
+    }
+}

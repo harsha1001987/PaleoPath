@@ -1,0 +1,185 @@
+/* ═══════════════════════════════════════════════════════════════
+   Hero Section – Cinematic CSS
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Section wrapper ─────────────────────────────────────────── */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: #30302d;
+  color: #f4f1ec;
+}
+
+/* ── Grain overlay ───────────────────────────────────────────── */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  animation: grainShift 0.9s steps(1) infinite;
+  opacity: 0.65;
+}
+
+@keyframes grainShift {
+  0% {
+    background-position: 0 0;
+  }
+
+  20% {
+    background-position: -30px 15px;
+  }
+
+  40% {
+    background-position: 15px -20px;
+  }
+
+  60% {
+    background-position: -20px -10px;
+  }
+
+  80% {
+    background-position: 10px 25px;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* ── Canvas ──────────────────────────────────────────────────── */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  cursor: crosshair;
+}
+
+/* ── Content layer ───────────────────────────────────────────── */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 100vh;
+  padding-bottom: 10vh;
+  gap: 1.6rem;
+  text-align: center;
+  pointer-events: none;
+  /* canvas handles mouse; re-enable on children */
+}
+
+.hero-content>* {
+  pointer-events: auto;
+}
+
+/* ── Headline ────────────────────────────────────────────────── */
+.hero-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 7vw, 6.5rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+  max-width: 900px;
+  margin: 0;
+  position: relative;
+  display: block;
+}
+
+/* Per-letter animation */
+.letter-span {
+  display: inline;
+  position: relative;
+  top: 0;
+  opacity: 0;
+  transition: none;
+}
+
+.letter-span.letter-visible {
+  animation: letterReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes letterReveal {
+  0% {
+    opacity: 0;
+    top: 10px;
+  }
+
+  100% {
+    opacity: 1;
+    top: 0;
+  }
+}
+
+/* ── Subtitle ────────────────────────────────────────────────── */
+.subtitle-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: rgba(244, 241, 236, 0.78);
+  max-width: 560px;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: slideUpFade 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Glowing underline */
+.glow-underline {
+  display: block;
+  height: 1px;
+  width: 0;
+  background: linear-gradient(90deg, transparent, rgba(220, 170, 80, 0.8), transparent);
+  box-shadow: 0 0 8px rgba(220, 170, 80, 0.5);
+  animation: growLine 1.1s cubic-bezier(0.22, 1, 0.36, 1) 1.9s forwards;
+}
+
+@keyframes growLine {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+
+  to {
+    width: 340px;
+    opacity: 1;
+  }
+}
+
+/* ── Buttons row ─────────────────────────────────────────────── */
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: slideUpFade 0.8s ease-out 1.6s forwards;
+}

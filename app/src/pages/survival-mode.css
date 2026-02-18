@@ -1,0 +1,116 @@
+.survival-page {
+  min-height: 100vh;
+  padding: 4rem 6rem;
+  background: radial-gradient(circle at top, #101a3a 0%, #050b1c 70%);
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Back button */
+.back-btn {
+  background: none;
+  border: none;
+  color: #d6d9e5;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}
+
+/* Title */
+.survival-title {
+  font-family: "Playfair Display", serif;
+  font-size: 3.2rem;
+  margin-bottom: 1rem;
+}
+
+.survival-subtitle {
+  max-width: 720px;
+  color: #d6d9e5;
+  line-height: 1.8;
+  margin-bottom: 3.5rem;
+}
+
+/* Grid */
+.species-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+/* Cards */
+.species-card {
+  padding: 2.5rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #4a220d, #2a1207);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.25s ease;
+  
+  cursor: pointer;
+
+
+}
+
+.species-card:hover {
+  transform: translateY(-6px);
+}
+
+.species-card h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.species-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.era {
+  font-size: 0.85rem;
+  color: #f0b37e;
+}
+
+.species-card p {
+  font-size: 0.95rem;
+  color: #e5e7ef;
+  line-height: 1.7;
+  margin: 1.2rem 0 2rem;
+}
+
+/* Homo sapiens special */
+.species-card.sapiens {
+  background: linear-gradient(135deg, #1b214a, #130c2b);
+}
+
+/* Play button */
+.play-btn {
+  background: none;
+  border: none;
+  color: #f0b37e;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+/* How to Play */
+.how-to-play {
+  margin-top: 4rem;
+  padding: 2rem 2.5rem;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #0b1633, #050b1c);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.how-to-play h2 {
+  font-family: "Playfair Display", serif;
+  margin-bottom: 1rem;
+}
+
+.how-to-play ol {
+  padding-left: 1.2rem;
+}
+
+.how-to-play li {
+  margin-bottom: 0.6rem;
+  color: #d6d9e5;
+}

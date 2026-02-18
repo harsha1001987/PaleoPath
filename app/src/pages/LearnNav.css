@@ -1,0 +1,287 @@
+/* ═══════════════════════════════════════════════════════════════
+   LearnNav.css — Premium Navigation for Learn Paleontology
+   Parchment background · Glassmorphism dock · Per-category accents
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Page shell ──────────────────────────────────────────────── */
+.learn-page {
+    min-height: 100vh;
+    /* Parchment / stone-grain background */
+    background-color: #f2ece0;
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+    color: #3a3530;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* ── Nav bar ─────────────────────────────────────────────────── */
+.learn-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 14px 24px;
+    /* Frosted parchment */
+    background: rgba(242, 236, 224, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    /* Thin bottom divider with glow fade */
+    border-bottom: 1px solid rgba(180, 160, 120, 0.28);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.6) inset,
+        0 4px 20px rgba(100, 80, 40, 0.07);
+}
+
+.learn-nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* ── Back button ─────────────────────────────────────────────── */
+.learn-back-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 18px 8px 10px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(180, 160, 120, 0.35);
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6b5e4e;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+    transition: box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.learn-back-btn:hover {
+    background: rgba(255, 255, 255, 0.85);
+    color: #3a3530;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.9) inset;
+}
+
+.learn-back-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(180, 160, 120, 0.18);
+    color: #6b5e4e;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.learn-back-btn:hover .learn-back-icon {
+    background: #3a3530;
+    color: #fff;
+}
+
+.learn-back-label {
+    line-height: 1;
+}
+
+/* ── Tab dock ────────────────────────────────────────────────── */
+.learn-tab-dock {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    /* Stone/glass dock */
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(180, 160, 120, 0.3);
+    border-radius: 999px;
+    box-shadow:
+        0 4px 24px rgba(100, 80, 40, 0.1),
+        0 1px 0 rgba(255, 255, 255, 0.85) inset;
+    backdrop-filter: blur(8px);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.learn-tab-dock::-webkit-scrollbar {
+    display: none;
+}
+
+/* ── Individual tab button ───────────────────────────────────── */
+.learn-tab {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8a7a68;
+    white-space: nowrap;
+    transition:
+        color 0.25s ease,
+        transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.25s ease;
+    z-index: 1;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Hover state — lift + soft glow */
+.learn-tab:not(.learn-tab--active):hover {
+    color: #3a3530;
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Active state — text on top of the animated bg */
+.learn-tab--active {
+    color: #fff;
+    transform: scale(1.03);
+}
+
+/* Framer-motion animated background pill */
+.learn-tab-bg {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    z-index: -1;
+    /* Default fallback — overridden per accent below */
+    background: #6b5e4e;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Icon ────────────────────────────────────────────────────── */
+.learn-tab-icon {
+    flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+}
+
+.learn-tab:not(.learn-tab--active):hover .learn-tab-icon {
+    transform: rotate(-8deg) scale(1.15);
+}
+
+.learn-tab--active .learn-tab-icon {
+    opacity: 1;
+}
+
+/* ── Per-category accent colors ──────────────────────────────── */
+
+/* Basics — neutral ivory / warm stone */
+.learn-tab--basics.learn-tab--active .learn-tab-bg {
+    background: linear-gradient(135deg, #7c6f5e, #5c5044);
+    box-shadow: 0 4px 18px rgba(100, 80, 55, 0.35);
+}
+
+.learn-tab--basics:not(.learn-tab--active):hover {
+    color: #5c5044;
+}
+
+/* Rocks — slate gray */
+.learn-tab--rocks.learn-tab--active .learn-tab-bg {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    box-shadow: 0 4px 18px rgba(75, 85, 99, 0.35);
+}
+
+.learn-tab--rocks:not(.learn-tab--active):hover {
+    color: #4b5563;
+}
+
+/* Fossils — sandy beige */
+.learn-tab--fossils.learn-tab--active .learn-tab-bg {
+    background: linear-gradient(135deg, #b59a6a, #8a7040);
+    box-shadow: 0 4px 18px rgba(140, 110, 55, 0.35);
+}
+
+.learn-tab--fossils:not(.learn-tab--active):hover {
+    color: #8a7040;
+}
+
+/* Eras — muted amber */
+.learn-tab--eras.learn-tab--active .learn-tab-bg {
+    background: linear-gradient(135deg, #c08a30, #9a6820);
+    box-shadow: 0 4px 18px rgba(160, 110, 30, 0.35);
+}
+
+.learn-tab--eras:not(.learn-tab--active):hover {
+    color: #9a6820;
+}
+
+/* Excavation — earthy brown */
+.learn-tab--excavation.learn-tab--active .learn-tab-bg {
+    background: linear-gradient(135deg, #8b5e3c, #6b3e22);
+    box-shadow: 0 4px 18px rgba(110, 65, 35, 0.35);
+}
+
+.learn-tab--excavation:not(.learn-tab--active):hover {
+    color: #6b3e22;
+}
+
+/* Discoveries — soft blue */
+.learn-tab--discoveries.learn-tab--active .learn-tab-bg {
+    background: linear-gradient(135deg, #5b7fa6, #3a5f86);
+    box-shadow: 0 4px 18px rgba(60, 95, 135, 0.35);
+}
+
+.learn-tab--discoveries:not(.learn-tab--active):hover {
+    color: #3a5f86;
+}
+
+/* ── Active underline grows from center ──────────────────────── */
+.learn-tab--active::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.6);
+    animation: underlineGrow 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+@keyframes underlineGrow {
+    to {
+        width: 60%;
+    }
+}
+
+/* ── Main content area ───────────────────────────────────────── */
+.learn-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    min-height: 80vh;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 640px) {
+    .learn-nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .learn-tab-dock {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .learn-tab {
+        padding: 7px 12px;
+        font-size: 0.65rem;
+    }
+}

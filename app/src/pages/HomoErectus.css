@@ -1,0 +1,376 @@
+/* ═══════════════════════════════════════════════════════════════
+   HOMO ERECTUS – "Fire & Expansion"
+   Tone: Energy. Movement. Growth. Alive.
+   Accent: Amber / orange (fire)
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Page shell ──────────────────────────────────────────────── */
+.species-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(180, 80, 20, 0.18) 0%, transparent 60%),
+        radial-gradient(ellipse at bottom, rgba(120, 50, 10, 0.12) 0%, transparent 55%),
+        linear-gradient(180deg, #141008 0%, #0a0806 100%);
+    color: #f0e8d8;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Ember particle canvas placeholder — animated via JS */
+/* Faint radial light behind hero */
+.species-page::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(200, 100, 20, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    animation: emberGlow 6s ease-in-out infinite;
+}
+
+@keyframes emberGlow {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: translateX(-50%) scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.08);
+    }
+}
+
+/* Grain */
+.species-page::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ── Top bar ─────────────────────────────────────────────────── */
+.species-topbar {
+    position: relative;
+    z-index: 10;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 36px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(200, 100, 20, 0.2);
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: rgba(220, 150, 60, 0.75);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.back-btn:hover {
+    color: #e8903a;
+}
+
+.topbar-title {
+    margin: 0 auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: rgba(230, 160, 70, 0.7);
+    text-transform: uppercase;
+}
+
+/* ── Content ─────────────────────────────────────────────────── */
+.species-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ── Header block ────────────────────────────────────────────── */
+.species-header {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: slideReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+.species-icon {
+    font-size: 68px;
+}
+
+.species-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.4rem, 7vw, 6.2rem);
+    font-weight: 500;
+    margin: 0 0 6px;
+    color: #f8eed8;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 40px rgba(200, 100, 20, 0.25);
+}
+
+.species-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: #c07030;
+    margin-bottom: 4px;
+}
+
+.species-era {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(200, 140, 60, 0.65);
+}
+
+/* ── Description ─────────────────────────────────────────────── */
+.species-description {
+    max-width: 680px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #c8bca8;
+    opacity: 0;
+    animation: slideReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+/* ── Details section ─────────────────────────────────────────── */
+.species-details {
+    margin-top: 80px;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px 90px;
+    margin-bottom: 80px;
+}
+
+/* Section headings — animated underline growing left to right */
+.detail-block h3,
+.detail-wide h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #f4e8d0;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    position: relative;
+    letter-spacing: 0.03em;
+}
+
+.detail-block h3::after,
+.detail-wide h3::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1.5px;
+    width: 0;
+    background: linear-gradient(90deg, #e07030, rgba(200, 100, 20, 0.3));
+    transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.detail-block.visible h3::after,
+.detail-wide.visible h3::after {
+    width: 100%;
+}
+
+.detail-block p,
+.detail-wide p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #b0a898;
+}
+
+.detail-block ul {
+    padding-left: 16px;
+    margin: 0;
+}
+
+.detail-block li {
+    font-size: 0.93rem;
+    line-height: 1.75;
+    color: #b0a898;
+    margin-bottom: 8px;
+}
+
+/* Scroll fade + hover highlight */
+.detail-block,
+.detail-wide {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    padding: 20px;
+    border-radius: 10px;
+    transition: opacity 0.7s ease, transform 0.7s ease, background 0.3s ease;
+}
+
+.detail-block.visible,
+.detail-wide.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.detail-block:hover {
+    background: rgba(200, 100, 20, 0.06);
+}
+
+/* Wide sections */
+.detail-wide {
+    max-width: 860px;
+    margin: 0 auto 64px;
+}
+
+/* Discoveries pills */
+.discoveries {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.discoveries span {
+    background: rgba(180, 90, 20, 0.1);
+    border: 1px solid rgba(180, 90, 20, 0.25);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    color: #d4a060;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.discoveries span:hover {
+    background: rgba(180, 90, 20, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Highlight box */
+.detail-wide.highlight {
+    background: rgba(160, 70, 15, 0.1);
+    border: 1px solid rgba(180, 90, 20, 0.25);
+    padding: 36px 40px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(180, 80, 20, 0.08);
+}
+
+/* ── Quiz section ────────────────────────────────────────────── */
+.detail-wide.quiz-cta {
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 20px 0;
+    margin: 0 auto 40px;
+}
+
+.quiz-card {
+    background: rgba(20, 14, 8, 0.9);
+    border: 1px solid rgba(180, 90, 20, 0.3);
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 44px 40px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 8px 36px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(180, 90, 20, 0.08);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.quiz-card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 20px rgba(180, 80, 20, 0.12);
+}
+
+.quiz-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.quiz-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 500;
+    color: #f8eed8;
+    margin-bottom: 10px;
+}
+
+.quiz-text {
+    font-size: 0.93rem;
+    line-height: 1.7;
+    color: #908070;
+    margin-bottom: 28px;
+}
+
+.quiz-btn {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(200, 90, 20, 0.3), rgba(160, 60, 10, 0.2));
+    color: #e8a050;
+    border: 1px solid rgba(200, 100, 30, 0.45);
+    border-radius: 8px;
+    padding: 13px 36px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.quiz-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    background: rgba(255, 180, 80, 0);
+    transition: background 0.3s ease;
+}
+
+.quiz-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(200, 100, 30, 0.35);
+    color: #f8c070;
+}
+
+/* Ripple */
+.quiz-btn:active::after {
+    background: rgba(255, 180, 80, 0.15);
+}
+
+.quiz-score {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: #908070;
+}
+
+/* ── Keyframes ───────────────────────────────────────────────── */
+@keyframes slideReveal {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

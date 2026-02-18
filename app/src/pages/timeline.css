@@ -1,0 +1,277 @@
+/* Main Timeline Section */
+.timeline-section {
+    position: relative;
+    width: 100%;
+    /* Max-width removed for full-width background */
+    background-color: #f4efe6;
+    padding: 80px 20px 120px;
+    text-align: center;
+    color: #333;
+}
+
+.timeline-title {
+    font-family: "Playfair Display", serif;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #2d2a26;
+}
+
+.timeline-subtitle {
+    font-family: "Lora", serif;
+    font-size: 1.25rem;
+    color: #5d5a56;
+    max-width: 600px;
+    margin: 0 auto 60px;
+    font-style: italic;
+}
+
+/* Timeline Graphics */
+.timeline-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    height: 200px;
+    /* Space for points */
+    display: flex;
+    align-items: center;
+}
+
+.timeline-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #e5e5e5;
+    border-radius: 4px;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.timeline-point {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.timeline-point:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.timeline-point .dot {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border: 4px solid #d45d3e;
+    /* Accent color */
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.timeline-point:hover .dot {
+    background: #d45d3e;
+    border-color: #ffffff;
+}
+
+.timeline-point.locked .dot {
+    border-color: #a8a29e;
+    background: #e7e5e4;
+    cursor: not-allowed;
+}
+
+.timeline-point .label {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    color: #44403c;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.timeline-point.top .label {
+    bottom: 40px;
+}
+
+.timeline-point.bottom .label {
+    top: 40px;
+}
+
+.timeline-point:hover .label {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.timeline-point.locked .label {
+    color: #a8a29e;
+}
+
+/* Basics Section (matches Learn components) */
+.basics-section {
+    background: #f4efe6;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.basics-title {
+    font-family: "Playfair Display", serif;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #292524;
+}
+
+.basics-subtitle {
+    font-family: "Lora", serif;
+    font-size: 1.1rem;
+    color: #57534e;
+    margin-bottom: 3rem;
+}
+
+.basics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto 3rem;
+}
+
+.basics-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e7e5e4;
+}
+
+.basics-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08);
+}
+
+.basics-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.basics-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.25rem;
+    color: #44403c;
+}
+
+.basics-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: #d45d3e;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.basics-btn:hover {
+    background: #b94f33;
+}
+
+/* Survival CTA */
+.survival-cta {
+    padding: 40px 20px 80px;
+    background: #f4efe6;
+    /* Seamless with basics */
+}
+
+.survival-card {
+    background: #1c1917;
+    /* Dark stone */
+    color: white;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 20px;
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    gap: 2rem;
+}
+
+.survival-text h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #fca5a5;
+    /* Light red accent */
+}
+
+.survival-text p {
+    color: #d6d3d1;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.survival-text ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.survival-text li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #e7e5e4;
+}
+
+.survival-text li::before {
+    content: "⚡";
+    position: absolute;
+    left: 0;
+    color: #fca5a5;
+}
+
+.survival-btn {
+    padding: 16px 32px;
+    background: #ef4444;
+    color: white;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 1.1rem;
+    transition: transform 0.2s;
+}
+
+.survival-btn:hover {
+    transform: scale(1.05);
+    background: #dc2626;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .survival-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .survival-text ul {
+        text-align: left;
+        display: inline-block;
+    }
+}

@@ -1,0 +1,380 @@
+/* ═══════════════════════════════════════════════════════════════
+   HOMO HABILIS – "Toolmaker"
+   Tone: Emerging structure. Early intelligence. More deliberate.
+   Accent: Warmer bronze
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Page shell ──────────────────────────────────────────────── */
+.species-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at top, #1e1c16 0%, #111009 100%);
+    color: #ede6d8;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Faint triangular grid overlay */
+.species-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpolygon points='30,2 58,56 2,56' fill='none' stroke='rgba(180,140,70,0.045)' stroke-width='0.8'/%3E%3C/svg%3E");
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Soft vignette */
+.species-page::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.45) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ── Top bar ─────────────────────────────────────────────────── */
+.species-topbar {
+    position: relative;
+    z-index: 10;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 36px;
+    background: rgba(0, 0, 0, 0.22);
+    border-bottom: 1px solid rgba(180, 140, 70, 0.18);
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: rgba(210, 175, 110, 0.7);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.back-btn:hover {
+    color: #d4a84e;
+}
+
+.topbar-title {
+    margin: 0 auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: rgba(220, 185, 120, 0.65);
+    text-transform: uppercase;
+}
+
+/* ── Content ─────────────────────────────────────────────────── */
+.species-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ── Header block ────────────────────────────────────────────── */
+.species-header {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: slideReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+.species-icon {
+    font-size: 64px;
+}
+
+.species-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 6.5vw, 5.8rem);
+    font-weight: 500;
+    margin: 0 0 6px;
+    color: #f4ead8;
+    letter-spacing: 0.02em;
+}
+
+.species-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: #b08840;
+    margin-bottom: 4px;
+}
+
+.species-era {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(190, 155, 90, 0.65);
+}
+
+/* ── Description ─────────────────────────────────────────────── */
+.species-description {
+    max-width: 680px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #ccc0a8;
+    opacity: 0;
+    animation: slideReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+/* ── Details section ─────────────────────────────────────────── */
+.species-details {
+    margin-top: 80px;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px 80px;
+    margin-bottom: 80px;
+}
+
+/* Section headings — cleaner underline */
+.detail-block h3,
+.detail-wide h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    font-weight: 500;
+    color: #f0e4c8;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid rgba(180, 140, 70, 0.4);
+    letter-spacing: 0.03em;
+    /* Slide + fade on scroll */
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.detail-block.visible h3,
+.detail-wide.visible h3 {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.detail-block p,
+.detail-wide p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #b0a890;
+}
+
+.detail-block ul {
+    padding-left: 16px;
+    margin: 0;
+}
+
+.detail-block li {
+    font-size: 0.93rem;
+    line-height: 1.75;
+    color: #b0a890;
+    margin-bottom: 8px;
+    /* Stagger bullet points */
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.detail-block.visible li:nth-child(1) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.1s;
+}
+
+.detail-block.visible li:nth-child(2) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.18s;
+}
+
+.detail-block.visible li:nth-child(3) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.26s;
+}
+
+.detail-block.visible li:nth-child(4) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.34s;
+}
+
+.detail-block.visible li:nth-child(5) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.42s;
+}
+
+.detail-block.visible li:nth-child(6) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.50s;
+}
+
+/* Scroll fade-in for blocks */
+.detail-block,
+.detail-wide {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.detail-block.visible,
+.detail-wide.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Wide sections */
+.detail-wide {
+    max-width: 860px;
+    margin: 0 auto 64px;
+}
+
+/* Discoveries pills */
+.discoveries {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.discoveries span {
+    background: rgba(160, 120, 50, 0.1);
+    border: 1px solid rgba(160, 120, 50, 0.22);
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    color: #c8b080;
+    transition: background 0.2s ease;
+}
+
+.discoveries span:hover {
+    background: rgba(160, 120, 50, 0.2);
+}
+
+/* Highlight box */
+.detail-wide.highlight {
+    background: rgba(130, 95, 35, 0.1);
+    border: 1px solid rgba(160, 120, 50, 0.22);
+    padding: 36px 40px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Quiz section ────────────────────────────────────────────── */
+.detail-wide.quiz-cta {
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 20px 0;
+    margin: 0 auto 40px;
+}
+
+.quiz-card {
+    background: rgba(28, 24, 16, 0.9);
+    border: 1px solid rgba(160, 120, 50, 0.28);
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 44px 40px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quiz-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+}
+
+.quiz-icon {
+    font-size: 38px;
+    margin-bottom: 12px;
+}
+
+.quiz-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 500;
+    color: #f4e8d0;
+    margin-bottom: 10px;
+}
+
+.quiz-text {
+    font-size: 0.93rem;
+    line-height: 1.7;
+    color: #9a9080;
+    margin-bottom: 28px;
+}
+
+.quiz-btn {
+    position: relative;
+    overflow: hidden;
+    background: rgba(160, 120, 50, 0.18);
+    color: #d4b070;
+    border: 1px solid rgba(180, 140, 60, 0.4);
+    border-radius: 6px;
+    padding: 13px 36px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* Light sweep animation */
+.quiz-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 220, 140, 0.18), transparent);
+    transform: skewX(-15deg);
+    transition: left 0.5s ease;
+}
+
+.quiz-btn:hover::after {
+    left: 130%;
+}
+
+.quiz-btn:hover {
+    background: rgba(180, 140, 60, 0.3);
+    color: #f0d090;
+}
+
+.quiz-score {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: #9a9080;
+}
+
+/* ── Keyframes ───────────────────────────────────────────────── */
+@keyframes slideReveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
